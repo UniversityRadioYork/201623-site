@@ -52,19 +52,6 @@ function getYoutubeFeed(playlistid, results, htmlid) {
             "</div>"
         );
       }
-      if (isOD && htmlid === "#sessions-videos") {
-        $(htmlid).append(
-          '<div class="thumbnail-container col-10 col-sm-7 col-md-4 col-lg-3">' +
-            '<a class="ury-card sessions link" href="' +
-            youtubeLink +
-            '">' +
-            '<div class="ury-card-body">' +
-            '<div class="ury-card-lg-title">View more on Youtube...</div>' +
-            "</div>" +
-            "</a>" +
-            "</div>"
-        );
-      }
       if (isIndex && htmlid === "#cin-videos") {
         $(htmlid).append(
           '<div class="thumbnail-container col-10 col-sm-7 col-md-4 col-lg-3">' +
@@ -140,9 +127,6 @@ countdown();
 
 //Youtube slideshow for index page
 function onGoogleLoad() {
-  if (isOD) {
-    getYoutubeFeed(youtubeSessionsPlaylistID, 15, "#sessions-videos");
-  }
   if (isIndex) {
     getYoutubeFeed(youtubeCINPlaylistID, 7, "#cin-videos");
   }

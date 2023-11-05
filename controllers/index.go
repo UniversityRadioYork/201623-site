@@ -19,6 +19,7 @@ type IndexController struct {
 type RenderData struct {
 	CurrentAndNext *myradio.CurrentAndNext
 	Banners        []myradio.Banner
+	Teams          []myradio.Team
 	Timeslots      []myradio.Timeslot
 	Podcasts       []myradio.Podcast
 	MsgBoxError    bool
@@ -36,7 +37,7 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	// This is where any form params would be parsed
 	model := models.NewIndexModel(ic.session)
 
-	currentAndNext, banners, timeslots, podcasts, showOnAir, err := model.Get()
+	currentAndNext, banners, teams, timeslots, podcasts, showOnAir, err := model.Get()
 
 	if err != nil {
 		log.Println(err)
@@ -46,6 +47,7 @@ func (ic *IndexController) Get(w http.ResponseWriter, r *http.Request) {
 	data := RenderData{
 		CurrentAndNext: currentAndNext,
 		Banners:        banners,
+		Teams:          teams,
 		Timeslots:      timeslots,
 		Podcasts:       podcasts,
 		ShowOnAir:      showOnAir,
@@ -64,7 +66,7 @@ func (ic *IndexController) Post(w http.ResponseWriter, r *http.Request) {
 	// Get all the data for the webpage
 	model := models.NewIndexModel(ic.session)
 
-	currentAndNext, banners, timeslots, podcasts, showOnAir, err := model.Get()
+	currentAndNext, banners, teams, timeslots, podcasts, showOnAir, err := model.Get()
 
 	if err != nil {
 		log.Println(err)
@@ -74,6 +76,7 @@ func (ic *IndexController) Post(w http.ResponseWriter, r *http.Request) {
 	data := RenderData{
 		CurrentAndNext: currentAndNext,
 		Banners:        banners,
+		Teams:          teams,
 		Timeslots:      timeslots,
 		Podcasts:       podcasts,
 		ShowOnAir:      showOnAir,

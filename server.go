@@ -117,8 +117,10 @@ func NewServer(c *structs.Config) (*Server, error) {
 	signupC := controllers.NewSignUpController(session, c)
 	postRouter.HandleFunc("/signup/", signupC.Post)
 
+	aboutC := controllers.NewAboutController(session, c)
+	getRouter.HandleFunc("/about/", aboutC.Get)
+
 	staticC := controllers.NewStaticController(c)
-	getRouter.HandleFunc("/about/", staticC.GetAbout)
 	getRouter.HandleFunc("/contact/", staticC.GetContact)
 	getRouter.HandleFunc("/competitions/", staticC.GetCompetitions)
 

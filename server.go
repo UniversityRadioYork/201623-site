@@ -108,7 +108,9 @@ func NewServer(c *structs.Config) (*Server, error) {
 	getRouter.HandleFunc("/people/{id:[0-9]+}/", pc.Get)
 
 	teamC := controllers.NewTeamController(session, c)
-	getRouter.HandleFunc("/teams/", teamC.GetAll)
+	getRouter.HandleFunc("/teams/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/about/", http.StatusFound)
+	})
 	getRouter.HandleFunc("/teams/{alias}/", teamC.Get)
 
 	getinvolvedC := controllers.NewGetInvolvedController(session, c)

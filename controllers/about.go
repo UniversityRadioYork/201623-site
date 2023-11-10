@@ -10,18 +10,18 @@ import (
 	"github.com/UniversityRadioYork/myradio-go"
 )
 
-// TeamController is the controller for the team information pages.
+// AboutController is the controller for the about page.
 type AboutController struct {
 	Controller
 }
 
-// NewTeamController returns a new TeamController with the MyRadio session s
+// NewAboutController returns a new AboutController with the MyRadio session s
 // and configuration context c.
 func NewAboutController(s *myradio.Session, c *structs.Config) *AboutController {
 	return &AboutController{Controller{session: s, config: c}}
 }
 
-// GetAll handles the HTTP GET request r for the all teams page, writing to w.
+// Get handles the HTTP GET request r for the about us page, writing to w.
 func (aboutC *AboutController) Get(w http.ResponseWriter, r *http.Request) {
 	teamM := models.NewTeamModel(aboutC.session)
 	teams, err := teamM.GetAll()

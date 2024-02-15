@@ -126,6 +126,8 @@ func NewServer(c *structs.Config) (*Server, error) {
 	getRouter.HandleFunc("/contact/", staticC.GetContact)
 	getRouter.HandleFunc("/competitions/", staticC.GetCompetitions)
 
+	showGridC := controllers.NewShowGridController(session, c)
+	getRouter.HandleFunc("/shows_grid/", showGridC.Get)
 	// Candidate Interview Night Routes
 	if c.PageContext.CIN {
 		getRouter.HandleFunc("/cin/", staticC.GetCIN)
